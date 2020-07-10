@@ -36,7 +36,7 @@ $ npm install -g aws-asap
 $ asap COMMAND
 running command...
 $ asap (-v|--version|version)
-aws-asap/0.1.0 darwin-x64 node-v12.16.1
+aws-asap/0.1.1 darwin-x64 node-v12.16.1
 $ asap --help [COMMAND]
 USAGE
   $ asap COMMAND
@@ -47,64 +47,10 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`asap ps`](#asap-ps)
-* [`asap sm`](#asap-sm)
 * [`asap autocomplete [SHELL]`](#asap-autocomplete-shell)
 * [`asap help [COMMAND]`](#asap-help-command)
-
-## `asap ps`
-
-search parameters in AWS SSM Parameter Store
-
-```
-USAGE
-  $ asap ps
-
-OPTIONS
-  -d, --disable-decryption       disable decryption of SecureString type params by default
-  -h, --help                     show CLI help
-  -n, --max-results=max-results  limit for amount of results returned, default is 50
-  -r, --region=region            AWS region override
-  -t, --term=term                term to search
-  -x, --extended                 show extra columns
-  --all                          retrieve every parameter in the region
-  --csv                          output is csv format
-  --no-header                    hide table header from output
-  --no-limit                     retrieve every parameter for the search term
-  --no-truncate                  do not truncate output to fit screen
-
-EXAMPLE
-  $ asap ps -t awesome-param
-```
-
-_See code: [src/commands/ps.ts](https://github.com/ljones92/aws-asap/blob/v0.1.0/src/commands/ps.ts)_
-
-## `asap sm`
-
-search parameters in AWS Secrets Manager
-
-```
-USAGE
-  $ asap sm
-
-OPTIONS
-  -h, --help                     show CLI help
-  -n, --max-results=max-results  limit for amount of results returned, default is 50
-  -r, --region=region            AWS region override
-  -t, --term=term                term to search
-  -x, --extended                 show extra columns
-  --all                          retrieve every parameter in the region
-  --csv                          output is csv format
-  --no-header                    hide table header from output
-  --no-limit                     retrieve every parameter for the search term
-  --no-truncate                  do not truncate output to fit screen
-
-EXAMPLE
-  $ asap sm -t awesome-param
-  awesome param value
-```
-
-_See code: [src/commands/sm.ts](https://github.com/ljones92/aws-asap/blob/v0.1.0/src/commands/sm.ts)_
+* [`asap ps`](#asap-ps)
+* [`asap sm`](#asap-sm)
 
 ## `asap autocomplete [SHELL]`
 
@@ -146,4 +92,57 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
 
+## `asap ps`
+
+search parameters in AWS SSM Parameter Store
+
+```
+USAGE
+  $ asap ps
+
+OPTIONS
+  -d, --disable-decryption       disable decryption of SecureString type params by default
+  -h, --help                     show CLI help
+  -n, --max-results=max-results  limit for amount of results returned, default is 50
+  -r, --region=region            AWS region override
+  -t, --term=term                term to search
+  -x, --extended                 show extra columns
+  --all                          retrieve every parameter in the region
+  --csv                          output is csv format
+  --no-header                    hide table header from output
+  --no-limit                     retrieve every parameter for the search term
+  --no-truncate                  do not truncate output to fit screen
+
+EXAMPLE
+  $ asap ps -t awesome-param
+```
+
+_See code: [src/commands/ps.ts](https://github.com/ljones92/aws-asap/blob/v0.1.1/src/commands/ps.ts)_
+
+## `asap sm`
+
+search parameters in AWS Secrets Manager
+
+```
+USAGE
+  $ asap sm
+
+OPTIONS
+  -h, --help                     show CLI help
+  -n, --max-results=max-results  limit for amount of results returned, default is 50
+  -r, --region=region            AWS region override
+  -t, --term=term                term to search
+  -x, --extended                 show extra columns
+  --all                          retrieve every parameter in the region
+  --csv                          output is csv format
+  --no-header                    hide table header from output
+  --no-limit                     retrieve every parameter for the search term
+  --no-truncate                  do not truncate output to fit screen
+
+EXAMPLE
+  $ asap sm -t awesome-param
+  awesome param value
+```
+
+_See code: [src/commands/sm.ts](https://github.com/ljones92/aws-asap/blob/v0.1.1/src/commands/sm.ts)_
 <!-- commandsstop -->
