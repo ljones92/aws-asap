@@ -36,7 +36,7 @@ $ npm install -g aws-asap
 $ asap COMMAND
 running command...
 $ asap (-v|--version|version)
-aws-asap/0.2.1 darwin-x64 node-v12.18.2
+aws-asap/0.2.2 darwin-x64 node-v12.18.2
 $ asap --help [COMMAND]
 USAGE
   $ asap COMMAND
@@ -117,7 +117,7 @@ EXAMPLE
   $ asap ps -t awesome-param
 ```
 
-_See code: [src/commands/ps.ts](https://github.com/ljones92/aws-asap/blob/v0.2.1/src/commands/ps.ts)_
+_See code: [src/commands/ps.ts](https://github.com/ljones92/aws-asap/blob/v0.2.2/src/commands/ps.ts)_
 
 ## `asap sm`
 
@@ -144,5 +144,5 @@ EXAMPLE
   awesome param value
 ```
 
-_See code: [src/commands/sm.ts](https://github.com/ljones92/aws-asap/blob/v0.2.1/src/commands/sm.ts)_
+_See code: [src/commands/sm.ts](https://github.com/ljones92/aws-asap/blob/v0.2.2/src/commands/sm.ts)_
 <!-- commandsstop -->
