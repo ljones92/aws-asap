@@ -35,9 +35,9 @@ export default class SearchPS extends Command {
         'no-header': flags.boolean({ exclusive: ['csv'], description: 'hide table header from output' }),
     };
 
-    searchResults: { name: String | undefined }[] = [];
+    searchResults: { name: string | undefined }[] = [];
 
-    async getSearchResults(searchTerm: string | undefined, ssm: SSM, nextToken?: string) {
+    async getSearchResults(searchTerm: string | undefined, ssm: SSM, nextToken?: string): Promise<void> {
         const { flags } = this.parse(SearchPS);
 
         const searchParams: SSM.DescribeParametersRequest = {
@@ -56,6 +56,7 @@ export default class SearchPS extends Command {
         }
 
         const matches = await ssm.describeParameters(searchParams).promise();
+
         const parameters = matches.Parameters?.map((parameter) => ({ name: parameter.Name })) ?? [];
 
         this.searchResults.push(...parameters);
@@ -65,7 +66,7 @@ export default class SearchPS extends Command {
         }
     }
 
-    async promptForParameters() {
+    async promptForParameters(): Promise<{ parameters: string[] }> {
         return inquirer.prompt([
             {
                 name: 'parameters',
@@ -76,19 +77,21 @@ export default class SearchPS extends Command {
         ]);
     }
 
-    async run() {
+    async run(): Promise<void> {
         const { flags } = this.parse(SearchPS);
 
         const ssm = new SSM({ region: flags.region ?? process.env.AWS_REGION ?? 'us-east-1' });
 
-        if (!ssm.config.credentials?.sessionToken) {
+        if (!ssm.config.credentials?.sessionToken && process.env.NODE_ENV !== 'test') {
             this.error('Please authenticate against AWS to use this tool');
         }
 
-        let searchTerm;
+        let searchTerm: string | undefined;
 
         if (!flags.all) {
-            searchTerm = flags.term ?? (await cli.prompt('What term do you want to search for?', { type: 'normal' }));
+            searchTerm =
+                flags.term ??
+                ((await cli.prompt('What term do you want to search for?', { type: 'normal' })) as string);
         }
 
         cli.action.start('listing matching parameters');
@@ -128,11 +131,11 @@ export default class SearchPS extends Command {
                     { ...flags },
                 );
 
-                this.exit(0);
+                return;
             }
         }
 
-        this.log('No Parameters found');
+        this.warn('No Parameters found');
         this.exit(1);
     }
 }

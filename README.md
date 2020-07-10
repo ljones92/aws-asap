@@ -47,50 +47,10 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`asap autocomplete [SHELL]`](#asap-autocomplete-shell)
-* [`asap help [COMMAND]`](#asap-help-command)
 * [`asap ps`](#asap-ps)
 * [`asap sm`](#asap-sm)
-
-## `asap autocomplete [SHELL]`
-
-display autocomplete installation instructions
-
-```
-USAGE
-  $ asap autocomplete [SHELL]
-
-ARGUMENTS
-  SHELL  shell type
-
-OPTIONS
-  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
-
-EXAMPLES
-  $ asap autocomplete
-  $ asap autocomplete bash
-  $ asap autocomplete zsh
-  $ asap autocomplete --refresh-cache
-```
-
-_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
-
-## `asap help [COMMAND]`
-
-display help for asap
-
-```
-USAGE
-  $ asap help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
+* [`asap autocomplete [SHELL]`](#asap-autocomplete-shell)
+* [`asap help [COMMAND]`](#asap-help-command)
 
 ## `asap ps`
 
@@ -145,4 +105,45 @@ EXAMPLE
 ```
 
 _See code: [src/commands/sm.ts](https://github.com/ljones92/aws-asap/blob/v0.1.0/src/commands/sm.ts)_
+
+## `asap autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ asap autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ asap autocomplete
+  $ asap autocomplete bash
+  $ asap autocomplete zsh
+  $ asap autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
+
+## `asap help [COMMAND]`
+
+display help for asap
+
+```
+USAGE
+  $ asap help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src/commands/help.ts)_
+
 <!-- commandsstop -->

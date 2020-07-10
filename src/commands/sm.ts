@@ -35,9 +35,9 @@ awesome param value
         'no-header': flags.boolean({ exclusive: ['csv'], description: 'hide table header from output' }),
     };
 
-    searchResults: { name: String | undefined }[] = [];
+    searchResults: { name: string | undefined }[] = [];
 
-    async getSearchResults(searchTerm: string | undefined, sm: SecretsManager, nextToken?: string) {
+    async getSearchResults(searchTerm: string | undefined, sm: SecretsManager, nextToken?: string): Promise<void> {
         const { flags } = this.parse(SearchSM);
 
         const searchParams: SecretsManager.ListSecretsRequest = {
@@ -61,10 +61,10 @@ awesome param value
         }
     }
 
-    async promptForSecrets() {
+    async promptForSecrets(): Promise<{ secrets: string[] }> {
         return inquirer.prompt([
             {
-                name: 'secret',
+                name: 'secrets',
                 message: 'Select your secrets',
                 type: 'checkbox',
                 choices: this.searchResults,
@@ -72,19 +72,21 @@ awesome param value
         ]);
     }
 
-    async run() {
+    async run(): Promise<void> {
         const { flags } = this.parse(SearchSM);
 
         const sm = new SecretsManager({ region: flags.region ?? process.env.AWS_REGION ?? 'us-east-1' });
 
-        if (!sm.config.credentials?.sessionToken) {
+        if (!sm.config.credentials?.sessionToken && process.env.NODE_ENV !== 'test') {
             this.error('Please authenticate against AWS to use this tool');
         }
 
-        let searchTerm;
+        let searchTerm: string | undefined;
 
         if (!flags.all) {
-            searchTerm = flags.term ?? (await cli.prompt('What term do you want to search for?', { type: 'normal' }));
+            searchTerm =
+                flags.term ??
+                ((await cli.prompt('What term do you want to search for?', { type: 'normal' })) as string);
         }
 
         cli.action.start('listing matching parameters');
@@ -94,13 +96,13 @@ awesome param value
         if (this.searchResults && this.searchResults.length > 0) {
             let chosenSecrets = await this.promptForSecrets();
 
-            while (chosenSecrets.secret.length === 0) {
+            while (chosenSecrets.secrets.length === 0) {
                 this.log('No secrets selected');
 
                 chosenSecrets = await this.promptForSecrets();
             }
 
-            const secretRequestPromises: Promise<SecretsManager.GetSecretValueResponse>[] = chosenSecrets.secret.map(
+            const secretRequestPromises: Promise<SecretsManager.GetSecretValueResponse>[] = chosenSecrets.secrets.map(
                 (item: string) => {
                     const getParams: SecretsManager.GetSecretValueRequest = {
                         SecretId: item,
@@ -129,11 +131,11 @@ awesome param value
                     { ...flags },
                 );
 
-                this.exit(0);
+                return;
             }
         }
 
-        this.log('No Parameters found');
+        this.warn('No Secrets found');
         this.exit(1);
     }
 }

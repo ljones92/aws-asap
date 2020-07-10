@@ -13,6 +13,7 @@
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3",
     "aws-sdk": "^2.712.0",
+    "aws-sdk-mock": "^5.1.0",
     "inquirer": "^7.3.0",
     "tslib": "^1"
   },
@@ -27,7 +28,6 @@
     "@typescript-eslint/parser": "^3.6.0",
     "chai": "^4",
     "eslint": "^7.4.0",
-    "eslint-config-airbnb": "^18.2.0",
     "eslint-config-oclif": "^3.1",
     "eslint-config-oclif-typescript": "^0.1",
     "eslint-config-prettier": "^6.11.0",
@@ -37,7 +37,8 @@
     "mocha": "^8",
     "nyc": "^14",
     "prettier": "^2.0.5",
-    "ts-node": "^8",
+    "sinon": "^9.0.2",
+    "ts-node": "^8.10.2",
     "typescript": "^3.3"
   },
   "engines": {
@@ -66,9 +67,9 @@
   "repository": "ljones92/aws-asap",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "posttest": "eslint . --ext .ts --config .eslintrc.js",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "nyc --extension .ts --reporter=lcov mocha --forbid-only -r ts-node/register \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"
