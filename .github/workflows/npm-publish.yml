@@ -41,7 +41,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
+          scope: '@ljones92'
       - run: yarn install --frozen-lockfile
       - run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token_github}}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
