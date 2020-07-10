@@ -1,7 +1,7 @@
 {
   "name": "aws-asap",
-  "description": "AWS Secrets and Parameters Searcher",
-  "version": "0.1.2",
+  "description": "AWS Secrets and Parameters Search CLI Tool",
+  "version": "0.2.0",
   "author": "Laurence Jones @ljones92",
   "bin": {
     "asap": "./bin/run"
@@ -13,7 +13,6 @@
     "@oclif/plugin-autocomplete": "^0.2.0",
     "@oclif/plugin-help": "^3",
     "aws-sdk": "^2.712.0",
-    "aws-sdk-mock": "^5.1.0",
     "inquirer": "^7.3.0",
     "tslib": "^1"
   },
@@ -26,6 +25,7 @@
     "@types/node": "^10",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "@typescript-eslint/parser": "^3.6.0",
+    "aws-sdk-mock": "^5.1.0",
     "chai": "^4",
     "eslint": "^7.4.0",
     "eslint-config-oclif": "^3.1",
@@ -53,7 +53,17 @@
   ],
   "homepage": "https://github.com/ljones92/aws-asap",
   "keywords": [
-    "oclif"
+    "aws",
+    "secrets manager",
+    "parameter store",
+    "secret",
+    "parameter",
+    "ssm",
+    "systems manager parameter store",
+    "ssm parameter store",
+    "aws systems manager parameter store",
+    "aws secrets manager",
+    "aws ssm parameter store"
   ],
   "license": "MIT",
   "main": "lib/index.js",
